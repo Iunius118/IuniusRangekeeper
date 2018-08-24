@@ -1,0 +1,16 @@
+[
+{
+  "modid": "iuniusrangekeeper",
+  "name": "Iunius's Rangekeeper",
+  "description": "A simple rangekeeper for Minecraft projectiles.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/Iunius118/IuniusRangekeeper",
+  "updateUrl": "",
+  "authorList": ["Iunius118"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
