@@ -1,15 +1,13 @@
 package iunius118.mods.iuniusrangekeeper.client.gui;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import iunius118.mods.iuniusrangekeeper.IuniusRangekeeper;
-import iunius118.mods.iuniusrangekeeper.config.Config;
+import iunius118.mods.iuniusrangekeeper.config.Configs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.client.IModGuiFactory;
 import net.minecraftforge.fml.client.config.GuiConfig;
 import net.minecraftforge.fml.client.config.IConfigElement;
@@ -28,12 +26,8 @@ public class ConfigGuiFactory implements IModGuiFactory {
 
 	@Override
 	public GuiScreen createConfigGui(GuiScreen parentScreen) {
-        ArrayList<IConfigElement> elements = new ArrayList<>();
-
-        for (Property property : Config.config.getCategory(Configuration.CATEGORY_GENERAL).getOrderedValues())
-        {
-            elements.add(new ConfigElement(property));
-        }
+        List<IConfigElement> elements;
+        elements = ConfigElement.from(Configs.class).getChildElements();
 
         return new GuiConfig(parentScreen, elements, IuniusRangekeeper.MOD_ID, false, false, IuniusRangekeeper.MOD_NAME);
 	}

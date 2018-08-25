@@ -1,0 +1,14 @@
+
+# Config
+
+iuniusrangekeeper.config.marker_color=Marker Color
+iuniusrangekeeper.config.marker_color.alpha=Alpha
+iuniusrangekeeper.config.marker_color.red=Red
+iuniusrangekeeper.config.marker_color.green=Green
+iuniusrangekeeper.config.marker_color.blue=Blue
+
+iuniusrangekeeper.config.ballistic=Ballistic Parameters
+iuniusrangekeeper.config.ballistic.max_flight_tick=Max Flight Time
+iuniusrangekeeper.config.ballistic.initial_velocity=Initial Velocity
+iuniusrangekeeper.config.ballistic.gravity=Gravity Factor
+iuniusrangekeeper.config.ballistic.resistance=Resistance Factor
