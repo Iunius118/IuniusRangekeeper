@@ -1,5 +1,9 @@
 
-# Config
+# Items
+
+item.iuniusrangekeeper.rangekeeper.name=Rangekeeper
+
+# Configs
 
 iuniusrangekeeper.config.marker_color=Marker Color
 iuniusrangekeeper.config.marker_color.alpha=Alpha
