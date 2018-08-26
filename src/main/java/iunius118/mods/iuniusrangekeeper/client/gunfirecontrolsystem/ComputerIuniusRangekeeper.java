@@ -35,8 +35,8 @@ public class ComputerIuniusRangekeeper implements IGunComputer
 
     public void setBallisticParameters(int tickMaxFuse, double initialVelocity, double gravity, double resistance)
     {
-        boolean isGravityChanged = this.gravity == gravity;
-        boolean isResistanceChanged = this.resistance == resistance;
+        boolean isGravityChanged = this.gravity != gravity;
+        boolean isResistanceChanged = this.resistance != resistance;
 
         this.tickMaxFuse = tickMaxFuse;
         this.initialVelocity = initialVelocity;
