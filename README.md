@@ -1,6 +1,6 @@
 # Iunius's Rangekeeper
 
-Minecraft 1.12.2用の射撃補助ツールを追加するmod。
+Minecraft 1.12.2用の射撃補助ツールを追加するmod。Forge 1.12.2-14.23.4.2705+ 対応。
 
 ダウンロード：[Releases](https://github.com/Iunius118/IuniusRangekeeper/releases)
 
