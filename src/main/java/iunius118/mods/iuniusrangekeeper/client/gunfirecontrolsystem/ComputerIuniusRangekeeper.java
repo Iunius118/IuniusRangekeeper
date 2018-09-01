@@ -35,19 +35,19 @@ public class ComputerIuniusRangekeeper implements IGunComputer
 
     public void setBallisticParameters(int tickMaxFuse, double initialVelocity, double gravity, double resistance)
     {
-        boolean isGravityChanged = this.gravity != gravity;
-        boolean isResistanceChanged = this.resistance != resistance;
+        boolean hasGravityChanged = (this.gravity != gravity);
+        boolean hasResistanceChanged = (this.resistance != resistance);
 
         this.tickMaxFuse = tickMaxFuse;
         this.initialVelocity = initialVelocity;
         this.gravity = gravity;
         this.resistance = resistance;
-        updateBallisticParameters(isGravityChanged, isResistanceChanged);
+        updateBallisticParameters(hasGravityChanged, hasResistanceChanged);
     }
 
-    private void updateBallisticParameters(boolean isGravityChanged, boolean isResistanceChanged)
+    private void updateBallisticParameters(boolean hasGravityChanged, boolean hasResistanceChanged)
     {
-        if (isResistanceChanged)
+        if (hasResistanceChanged)
         {
             for (int i = 0; i < v0Rate.length; i++)
             {
@@ -55,7 +55,7 @@ public class ComputerIuniusRangekeeper implements IGunComputer
             }
         }
 
-        if (isGravityChanged || isResistanceChanged)
+        if (hasGravityChanged || hasResistanceChanged)
         {
             gRRate = gravity / resistance;
         }
@@ -178,7 +178,7 @@ public class ComputerIuniusRangekeeper implements IGunComputer
             double v0sq2 = v0x2 * v0x2 + v0y2 * v0y2;
 
             // If the initial velocity which calculated is closest to the real one (4 m/ticks), update the future target direction from the player and the fuse tick, and return
-            if ((v0sq1 > v0sq2 && v0sq1 >= v0sq && v0sq2 < v0sq) || (v0sq1 < v0sq2 && v0sq1 < v0sq && v0sq2 >= v0sq))
+            if ((v0sq1 > v0sq2 && v0sq1 >= v0sq && v0sq2 <= v0sq) || (v0sq1 < v0sq2 && v0sq1 <= v0sq && v0sq2 >= v0sq))
             {
                 if (Math.abs(v0sq1 - v0sq) <= Math.abs(v0sq2 - v0sq))
                 {
