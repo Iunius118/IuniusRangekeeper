@@ -215,7 +215,7 @@ public class ComputerIuniusRangekeeper implements IGunComputer
 
     private double ticksToV0Rate(int t)
     {
-        if (t >= 0 && t < 256)
+        if (t >= 0 && t < v0Rate.length)
         {
             return v0Rate[t];
         }
