@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityMultiPart;
 import net.minecraft.entity.MultiPartEntityPart;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -63,6 +64,18 @@ public class Target
         this.worldHashCode = world.hashCode();
     }
 
+    public Entity getTargetEntityByID(World world, int id, boolean isDragonBody)
+    {
+        Entity entity = world.getEntityByID(this.entityId);
+
+        if (isDragonBody && entity instanceof EntityDragon)
+        {
+            return ((EntityDragon) entity).dragonPartBody;
+        }
+
+        return entity;
+    }
+
     public void setCoord(World world, double x, double y, double z)
     {
         this.type = Type.BLOCK;
@@ -78,7 +91,7 @@ public class Target
         }
         else if (this.type == Type.ENTITY)
         {
-            Entity entity = world.getEntityByID(this.entityId);
+            Entity entity = getTargetEntityByID(world, this.entityId, true);
 
             if (entity == null || entity.isDead)
             {
@@ -102,7 +115,7 @@ public class Target
         }
         else if (this.type == Type.ENTITY)
         {
-            Entity entity = world.getEntityByID(this.entityId);
+            Entity entity = getTargetEntityByID(world, this.entityId, true);
 
             if (entity != null && !entity.isDead)
             {
@@ -126,15 +139,40 @@ public class Target
         }
         else if (this.type == Type.ENTITY)
         {
-            Entity entity = world.getEntityByID(this.entityId);
+            return getEntityVisualPos(world, this.entityId, partialTicks);
+        }
 
-            if (entity != null && !entity.isDead)
+        return null;
+    }
+
+    public Vec3d getEntityVisualPos(World world, int entityId, float partialTicks)
+    {
+        Entity entity = getTargetEntityByID(world, this.entityId, false);
+
+        if (entity != null && !entity.isDead)
+        {
+            double bx = entity.posX;
+            double by = entity.posY;
+            double bz = entity.posZ;
+            float height = entity.height;
+
+            if (entity instanceof EntityDragon)
             {
-                double x = entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * partialTicks;
-                double y = entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * partialTicks + entity.height / 2.0D;
-                double z = entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * partialTicks;
-                return new Vec3d(x, y, z);
+                Entity entityDragonBody = ((EntityDragon) entity).dragonPartBody;
+
+                if (entityDragonBody != null)
+                {
+                    bx = entityDragonBody.posX;
+                    by = entityDragonBody.posY;
+                    bz = entityDragonBody.posZ;
+                    height = entityDragonBody.height;
+                }
             }
+
+            double x = bx + (entity.lastTickPosX - entity.posX) * (1 - partialTicks);
+            double y = by + (entity.lastTickPosY - entity.posY) * (1 - partialTicks) + height / 2.0D;
+            double z = bz + (entity.lastTickPosZ - entity.posZ) * (1 - partialTicks);
+            return new Vec3d(x, y, z);
         }
 
         return null;
@@ -153,16 +191,23 @@ public class Target
         }
         else if (this.type == Type.ENTITY)
         {
-            Entity entity = world.getEntityByID(this.entityId);
+            return getEntityPosDelta(world, this.entityId);
+        }
 
-            if (entity != null && !entity.isDead)
-            {
-                double x = entity.posX - entity.lastTickPosX;
-                double y = entity.posY - entity.lastTickPosY;
-                double z = entity.posZ - entity.lastTickPosZ;
-                // System.out.println(entity.getName() + " " + new Vec3d(x, y, z));
-                return new Vec3d(x, y, z);
-            }
+        return null;
+    }
+
+    public Vec3d getEntityPosDelta(World world, int entityId)
+    {
+        Entity entity = getTargetEntityByID(world, entityId, false);
+
+        if (entity != null && !entity.isDead)
+        {
+            double x = entity.posX - entity.lastTickPosX;
+            double y = entity.posY - entity.lastTickPosY;
+            double z = entity.posZ - entity.lastTickPosZ;
+            // System.out.println(entity.getName() + " " + new Vec3d(x, y, z));
+            return new Vec3d(x, y, z);
         }
 
         return null;
