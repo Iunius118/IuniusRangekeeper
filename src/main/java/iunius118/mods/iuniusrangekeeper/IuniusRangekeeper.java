@@ -33,7 +33,7 @@ public class IuniusRangekeeper
 
     public static final String MOD_ID = "iuniusrangekeeper";
     public static final String MOD_NAME = "Iunius's Rangekeeper";
-    public static final String MOD_VERSION = "1.12.2-1.0.1.0";
+    public static final String MOD_VERSION = "1.12.2-1.0.1.1";
     public static final String MOD_DEPENDENCIES = "required-after:forge@[1.12.2-14.23.4.2705,)";
 
     public static final Configs CONFIGS = new Configs();
