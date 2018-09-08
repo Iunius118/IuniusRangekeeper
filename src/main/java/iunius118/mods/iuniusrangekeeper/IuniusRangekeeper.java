@@ -9,10 +9,7 @@ import iunius118.mods.iuniusrangekeeper.item.ItemRangekeeper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Config.Type;
-import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -33,13 +30,13 @@ public class IuniusRangekeeper
 
     public static final String MOD_ID = "iuniusrangekeeper";
     public static final String MOD_NAME = "Iunius's Rangekeeper";
-    public static final String MOD_VERSION = "1.12.2-1.0.1.1";
+    public static final String MOD_VERSION = "1.12.2-1.0.1.2";
     public static final String MOD_DEPENDENCIES = "required-after:forge@[1.12.2-14.23.4.2705,)";
 
     public static final Configs CONFIGS = new Configs();
     public static Logger logger;
 
-    public static GunFireControlSystemIuniusRangekeeper rangekeeper = new GunFireControlSystemIuniusRangekeeper();
+    public static GunFireControlSystemIuniusRangekeeper rangekeeper;
 
     @ObjectHolder(MOD_ID)
     public static class ITEMS
@@ -55,6 +52,7 @@ public class IuniusRangekeeper
 
         if (event.getSide().isClient())
         {
+            rangekeeper = new GunFireControlSystemIuniusRangekeeper();
             MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
         }
     }
@@ -63,15 +61,6 @@ public class IuniusRangekeeper
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         event.getRegistry().register(new ItemRangekeeper().setRegistryName("rangekeeper").setTranslationKey(MOD_ID + ".rangekeeper").setCreativeTab(CreativeTabs.TOOLS));
-    }
-
-    @SubscribeEvent
-    public void onConfigChangedEvent(OnConfigChangedEvent event)
-    {
-        if (event.getModID().equals(MOD_ID))
-        {
-            ConfigManager.sync(MOD_ID, Type.INSTANCE);
-        }
     }
 
 }

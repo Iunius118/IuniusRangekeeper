@@ -22,11 +22,23 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.config.Config.Type;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 
 public class ClientEventHandler
 {
+
+    @SubscribeEvent
+    public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
+        if (event.getModID().equals(IuniusRangekeeper.MOD_ID))
+        {
+            ConfigManager.sync(IuniusRangekeeper.MOD_ID, Type.INSTANCE);
+        }
+    }
 
     @SubscribeEvent
     public void registerModels(ModelRegistryEvent event)
