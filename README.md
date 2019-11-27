@@ -1,5 +1,8 @@
 # Iunius's Rangekeeper
 
+This project ended, and the successor project [Type18BallisticComputer](https://github.com/Iunius118/Type18BallisticComputer) started.  
+Iunius's Rangekeeperは更新を終了し、今後は名称を[Type18BallisticComputer](https://github.com/Iunius118/Type18BallisticComputer)に変更して開発を継続します。
+
 Minecraft 1.12.2用の射撃補助ツールを追加するmod。Forge 1.12.2-14.23.4.2705+ 対応。
 
 ダウンロード：[Releases](https://github.com/Iunius118/IuniusRangekeeper/releases)
